@@ -3,8 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Koalla.ai — Captura Inteligente de Informações</title>
+<title>Koalla.ai — Captura Inteligente de Informações pelo WhatsApp</title>
+<meta name="description" content="Envie qualquer informação pelo WhatsApp e o Koalla.ai organiza, categoriza e guarda tudo automaticamente. Experimente grátis por 7 dias.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Koalla.ai — Captura Inteligente de Informações">
+<meta property="og:description" content="Sua memória turbinada por IA. Envie por texto, voz ou foto — o Koalla organiza tudo no WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://koalla.ai">
+<meta property="og:image" content="https://koalla.ai/og-image.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Koalla.ai — Captura Inteligente de Informações">
+<meta name="twitter:description" content="Sua memória turbinada por IA. Envie por texto, voz ou foto — o Koalla organiza tudo no WhatsApp.">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐨</text></svg>">
+
+<!-- Google Fonts com preconnect para performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --navy: #0b1526;
@@ -33,6 +53,13 @@
     font-weight: 400;
     line-height: 1.6;
     overflow-x: hidden;
+  }
+
+  /* ─── FOCUS STYLES (acessibilidade) ─── */
+  :focus-visible {
+    outline: 2px solid var(--blue-glow);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 
   /* ─── NOISE TEXTURE OVERLAY ─── */
@@ -65,6 +92,8 @@
     align-items: center;
     gap: 12px;
     text-decoration: none;
+    position: relative;
+    z-index: 101;
   }
 
   .nav-logo-icon {
@@ -119,6 +148,32 @@
     transform: translateY(-1px);
   }
 
+  /* ─── HAMBURGER MENU ─── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    position: relative;
+    z-index: 101;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
   /* ─── HERO ─── */
   .hero {
     position: relative;
@@ -172,35 +227,6 @@
     z-index: 1;
     max-width: 780px;
     margin: 0 auto;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(37,99,235,0.15);
-    border: 1px solid rgba(37,99,235,0.35);
-    color: #93c5fd;
-    padding: 7px 16px;
-    border-radius: 100px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 28px;
-    animation: fadeUp 0.8s ease both;
-  }
-
-  .hero-badge .dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #60a5fa;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.4); }
   }
 
   h1 {
@@ -266,7 +292,7 @@
     color: var(--white-muted);
   }
 
-  /* Mockup phone */
+  /* Mockup */
   .hero-mockup {
     position: relative;
     z-index: 1;
@@ -482,8 +508,6 @@
     align-items: center;
   }
 
-  .features-left { }
-
   .feature-list {
     margin-top: 40px;
     display: flex;
@@ -670,6 +694,39 @@
     font-weight: 700;
     padding: 2px 8px;
     margin-top: 4px;
+  }
+
+  /* ─── WHATSAPP CHECK LIST ─── */
+  .wa-checklist {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .wa-checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .wa-check-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(37,211,102,0.15);
+    border: 1px solid rgba(37,211,102,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #25D366;
+    font-weight: 700;
+  }
+
+  .wa-checklist-item span {
+    color: var(--white-dim);
+    font-size: 0.92rem;
   }
 
   /* ─── TESTIMONIALS ─── */
@@ -936,6 +993,25 @@
     box-shadow: 0 0 50px rgba(37,211,102,0.4);
   }
 
+  .btn-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 15px 28px;
+    border-radius: 12px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--white-dim);
+    transition: all 0.2s;
+  }
+
+  .btn-cta-secondary:hover {
+    border-color: var(--blue-accent);
+    color: var(--white);
+  }
+
   /* ─── FOOTER ─── */
   footer {
     border-top: 1px solid var(--border);
@@ -959,9 +1035,34 @@
   /* ─── RESPONSIVE ─── */
   @media (max-width: 768px) {
     nav { padding: 16px 20px; }
-    .nav-links { display: none; }
     .container { padding: 0 20px; }
 
+    /* Menu mobile */
+    .hamburger { display: flex; }
+
+    .nav-links {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(11,21,38,0.98);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      z-index: 99;
+    }
+
+    .nav-links.open { display: flex; }
+
+    .nav-links a { font-size: 1.2rem; }
+
+    .nav-cta {
+      padding: 14px 32px;
+      font-size: 1rem !important;
+    }
+
+    /* Sections */
     .steps,
     .features-grid,
     .wa-inner,
@@ -971,7 +1072,12 @@
     .features-cards { grid-template-columns: 1fr 1fr; }
     .feat-card.tall { grid-row: span 1; }
 
+    /* Esconde sidebar do mockup em mobile */
+    .mockup-sidebar { display: none; }
+
     footer { flex-direction: column; gap: 12px; text-align: center; }
+
+    .cta-box { padding: 48px 24px; }
   }
 
   /* Scroll reveal */
@@ -989,31 +1095,34 @@
 <body>
 
 <!-- NAV -->
-<nav>
+<nav aria-label="Navegação principal">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-icon">🐨</div>
+    <div class="nav-logo-icon" aria-hidden="true">🐨</div>
     <span class="nav-logo-text">Koalla<span>.ai</span></span>
   </a>
-  <ul class="nav-links">
+
+  <ul class="nav-links" id="nav-links">
     <li><a href="#como-funciona">Como funciona</a></li>
     <li><a href="#funcionalidades">Funcionalidades</a></li>
     <li><a href="#planos">Planos</a></li>
-    <li><a href="#cta" class="nav-cta">Começar grátis</a></li>
+    <!-- TODO: substitua o número abaixo pelo WhatsApp real -->
+    <li><a href="https://wa.me/55XXXXXXXXXXX?text=Oi+Koalla!" target="_blank" rel="noopener" class="nav-cta">Começar grátis</a></li>
   </ul>
+
+  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="orb-1"></div>
-  <div class="orb-2"></div>
+<section class="hero">
+  <div class="orb-1" aria-hidden="true"></div>
+  <div class="orb-2" aria-hidden="true"></div>
 
   <div style="width:100%; max-width:1100px; margin:0 auto; padding:0 24px;">
     <div class="hero-inner">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        Inteligência Artificial para sua memória
-      </div>
-
       <h1>
         Registre. Organize.<br>
         <span class="highlight">Encontre Tudo.</span>
@@ -1024,18 +1133,19 @@
       </p>
 
       <div class="hero-actions">
-        <a href="#cta" class="btn-primary">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.998 0C5.372 0 0 5.373 0 12.001c0 2.117.554 4.099 1.523 5.817L.057 23.998l6.306-1.655A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.625 0 11.998 0zm.002 21.818a9.818 9.818 0 01-5.011-1.368l-.36-.213-3.741.981.997-3.648-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.429 0 9.818 4.388 9.818 9.818 0 5.43-4.389 9.818-9.818 9.818z"/></svg>
+        <!-- TODO: substitua o número abaixo pelo WhatsApp real -->
+        <a href="https://wa.me/55XXXXXXXXXXX?text=Oi+Koalla!" target="_blank" rel="noopener" class="btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.998 0C5.372 0 0 5.373 0 12.001c0 2.117.554 4.099 1.523 5.817L.057 23.998l6.306-1.655A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.625 0 11.998 0zm.002 21.818a9.818 9.818 0 01-5.011-1.368l-.36-.213-3.741.981.997-3.648-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.429 0 9.818 4.388 9.818 9.818 0 5.43-4.389 9.818-9.818 9.818z"/></svg>
           Começar pelo WhatsApp
         </a>
-        <span class="hero-note">Grátis para começar · Sem cartão de crédito</span>
+        <span class="hero-note">7 dias grátis · Cartão necessário · Sem cobrança no trial</span>
       </div>
     </div>
 
     <!-- Mockup -->
     <div class="hero-mockup">
       <div class="mockup-container">
-        <div class="mockup-bar">
+        <div class="mockup-bar" aria-hidden="true">
           <div class="mockup-dot" style="background:#ff5f57"></div>
           <div class="mockup-dot" style="background:#febc2e"></div>
           <div class="mockup-dot" style="background:#28c840"></div>
@@ -1057,7 +1167,7 @@
             </div>
           </div>
 
-          <div class="mockup-sidebar">
+          <div class="mockup-sidebar" aria-hidden="true">
             <div class="sidebar-title">Categorias</div>
             <div class="category-tag" style="background:rgba(37,99,235,0.15);color:#93c5fd;border:1px solid rgba(37,99,235,0.25)">💼 Vendas</div>
             <div class="category-tag" style="background:rgba(201,168,76,0.12);color:#e8c76a;border:1px solid rgba(201,168,76,0.2)">📅 Agenda</div>
@@ -1073,7 +1183,7 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- COMO FUNCIONA -->
 <section class="how" id="como-funciona">
@@ -1086,20 +1196,20 @@
 
     <div class="steps reveal">
       <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-icon">💬</div>
+        <div class="step-num" aria-hidden="true">01</div>
+        <div class="step-icon" aria-hidden="true">💬</div>
         <h3>Envie pelo WhatsApp</h3>
         <p>Texto, áudio ou foto. Mande como quiser — o Koalla entende tudo.</p>
       </div>
       <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-icon">🧠</div>
+        <div class="step-num" aria-hidden="true">02</div>
+        <div class="step-icon" aria-hidden="true">🧠</div>
         <h3>A IA processa e organiza</h3>
         <p>Em segundos, a inteligência artificial interpreta, classifica e categoriza o que você enviou.</p>
       </div>
       <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-icon">🔍</div>
+        <div class="step-num" aria-hidden="true">03</div>
+        <div class="step-icon" aria-hidden="true">🔍</div>
         <h3>Encontre quando precisar</h3>
         <p>Busca por texto, filtros por categoria, datas ou tags. Nada se perde.</p>
       </div>
@@ -1118,21 +1228,21 @@
 
         <div class="feature-list">
           <div class="feature-item">
-            <div class="fi-icon">🎙️</div>
+            <div class="fi-icon" aria-hidden="true">🎙️</div>
             <div class="fi-content">
               <h4>Áudio & Transcrição</h4>
               <p>Mande uma nota de voz e receba o texto transcrito e organizado.</p>
             </div>
           </div>
           <div class="feature-item">
-            <div class="fi-icon">🏷️</div>
+            <div class="fi-icon" aria-hidden="true">🏷️</div>
             <div class="fi-content">
               <h4>Categorização Automática</h4>
               <p>A IA identifica o tipo da informação e já organiza por categoria.</p>
             </div>
           </div>
           <div class="feature-item">
-            <div class="fi-icon">📊</div>
+            <div class="fi-icon" aria-hidden="true">📊</div>
             <div class="fi-content">
               <h4>Relatórios & Compartilhamento</h4>
               <p>Gere resumos, relatórios e exporte seus dados com um comando.</p>
@@ -1143,7 +1253,7 @@
 
       <div class="features-cards reveal">
         <div class="feat-card tall">
-          <span class="feat-card-icon">🕰️</span>
+          <span class="feat-card-icon" aria-hidden="true">🕰️</span>
           <h4>Histórico Completo</h4>
           <p>Todo registro salvo com data, hora e contexto. Linha do tempo de tudo que você capturou.</p>
           <div style="margin-top:20px; display:flex; flex-direction:column; gap:8px;">
@@ -1153,12 +1263,12 @@
           </div>
         </div>
         <div class="feat-card">
-          <span class="feat-card-icon">⚡</span>
+          <span class="feat-card-icon" aria-hidden="true">⚡</span>
           <h4>Busca Instantânea</h4>
           <p>Encontre qualquer registro em segundos.</p>
         </div>
         <div class="feat-card">
-          <span class="feat-card-icon">🔐</span>
+          <span class="feat-card-icon" aria-hidden="true">🔐</span>
           <h4>100% Seguro</h4>
           <p>Seus dados criptografados e privados.</p>
         </div>
@@ -1173,7 +1283,7 @@
     <div class="wa-inner">
       <div class="wa-phone reveal">
         <div class="wa-phone-header">
-          <div class="wa-avatar">🐨</div>
+          <div class="wa-avatar" aria-hidden="true">🐨</div>
           <div>
             <div class="wa-name">Koalla.ai</div>
             <div class="wa-status">● online agora</div>
@@ -1209,18 +1319,18 @@
         <h2 class="section-title">Onde você já está, do jeito que você já usa</h2>
         <p class="section-desc" style="max-width:100%">Sem instalar mais um app. O Koalla.ai funciona diretamente no WhatsApp — o canal que você já usa o dia inteiro. Mande a informação e pronto.</p>
 
-        <div style="margin-top:32px; display:flex; flex-direction:column; gap:16px;">
-          <div style="display:flex;align-items:center;gap:12px;">
-            <div style="width:36px;height:36px;border-radius:50%;background:rgba(37,211,102,0.15);border:1px solid rgba(37,211,102,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">✓</div>
-            <span style="color:var(--white-dim);font-size:0.92rem">Sem downloads nem cadastros complicados</span>
+        <div class="wa-checklist">
+          <div class="wa-checklist-item">
+            <div class="wa-check-icon" aria-hidden="true">✓</div>
+            <span>Sem downloads nem cadastros complicados</span>
           </div>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <div style="width:36px;height:36px;border-radius:50%;background:rgba(37,211,102,0.15);border:1px solid rgba(37,211,102,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">✓</div>
-            <span style="color:var(--white-dim);font-size:0.92rem">Funciona no iPhone e Android</span>
+          <div class="wa-checklist-item">
+            <div class="wa-check-icon" aria-hidden="true">✓</div>
+            <span>Funciona no iPhone e Android</span>
           </div>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <div style="width:36px;height:36px;border-radius:50%;background:rgba(37,211,102,0.15);border:1px solid rgba(37,211,102,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">✓</div>
-            <span style="color:var(--white-dim);font-size:0.92rem">Respostas em menos de 2 segundos</span>
+          <div class="wa-checklist-item">
+            <div class="wa-check-icon" aria-hidden="true">✓</div>
+            <span>Respostas em menos de 2 segundos</span>
           </div>
         </div>
       </div>
@@ -1239,10 +1349,10 @@
 
     <div class="test-grid reveal">
       <div class="test-card">
-        <div class="test-stars">★★★★★</div>
+        <div class="test-stars" aria-label="5 estrelas">★★★★★</div>
         <p class="test-text">"Finalmente um lugar pra guardar tudo sem perder tempo organizando. A IA categoriza melhor do que eu faria."</p>
         <div class="test-author">
-          <div class="test-avatar" style="background:rgba(37,99,235,0.2);color:#93c5fd">R</div>
+          <div class="test-avatar" style="background:rgba(37,99,235,0.2);color:#93c5fd" aria-hidden="true">R</div>
           <div>
             <div class="test-name">Rodrigo M.</div>
             <div class="test-role">Empreendedor · SP</div>
@@ -1250,10 +1360,10 @@
         </div>
       </div>
       <div class="test-card">
-        <div class="test-stars">★★★★★</div>
+        <div class="test-stars" aria-label="5 estrelas">★★★★★</div>
         <p class="test-text">"Uso pra capturar ideias e pendências durante o dia. É como ter uma secretária de IA no WhatsApp."</p>
         <div class="test-author">
-          <div class="test-avatar" style="background:rgba(201,168,76,0.15);color:#e8c76a">A</div>
+          <div class="test-avatar" style="background:rgba(201,168,76,0.15);color:#e8c76a" aria-hidden="true">A</div>
           <div>
             <div class="test-name">Ana Paula S.</div>
             <div class="test-role">Consultora · RJ</div>
@@ -1261,10 +1371,10 @@
         </div>
       </div>
       <div class="test-card">
-        <div class="test-stars">★★★★★</div>
+        <div class="test-stars" aria-label="5 estrelas">★★★★★</div>
         <p class="test-text">"Mando áudio no trânsito e quando chego no escritório está tudo anotado e organizado. Incrível."</p>
         <div class="test-author">
-          <div class="test-avatar" style="background:rgba(16,185,129,0.15);color:#6ee7b7">F</div>
+          <div class="test-avatar" style="background:rgba(16,185,129,0.15);color:#6ee7b7" aria-hidden="true">F</div>
           <div>
             <div class="test-name">Felipe C.</div>
             <div class="test-role">Vendedor · MG</div>
@@ -1284,6 +1394,7 @@
     </div>
 
     <div class="pricing-grid reveal">
+      <!-- TODO: substitua XXXXXXXXXXX pelo número real do WhatsApp -->
       <div class="price-card">
         <div class="price-plan">Starter</div>
         <div class="price-amount">Grátis</div>
@@ -1294,7 +1405,7 @@
           <li>3 categorias</li>
           <li>Histórico 30 dias</li>
         </ul>
-        <a href="#" class="btn-plan outline">Começar grátis</a>
+        <a href="https://wa.me/55XXXXXXXXXXX?text=Oi+Koalla!+Quero+o+plano+Starter" target="_blank" rel="noopener" class="btn-plan outline">Começar grátis</a>
       </div>
 
       <div class="price-card featured">
@@ -1310,7 +1421,8 @@
           <li>Busca avançada</li>
           <li>Relatórios e exportação</li>
         </ul>
-        <a href="#" class="btn-plan solid">Assinar Pro</a>
+        <!-- TODO: substitua pelo link do checkout do plano Pro -->
+        <a href="https://wa.me/55XXXXXXXXXXX?text=Oi+Koalla!+Quero+assinar+o+plano+Pro" target="_blank" rel="noopener" class="btn-plan solid">Assinar Pro</a>
       </div>
 
       <div class="price-card">
@@ -1324,7 +1436,7 @@
           <li>Integrações via API</li>
           <li>Suporte prioritário</li>
         </ul>
-        <a href="#" class="btn-plan outline">Falar com time</a>
+        <a href="https://wa.me/55XXXXXXXXXXX?text=Oi+Koalla!+Quero+saber+sobre+o+plano+Business" target="_blank" rel="noopener" class="btn-plan outline">Falar com time</a>
       </div>
     </div>
   </div>
@@ -1335,13 +1447,14 @@
   <div class="container">
     <div class="cta-box reveal">
       <h2>Sua memória merece uma IA</h2>
-      <p>Comece agora pelo WhatsApp. É grátis e leva menos de 1 minuto.</p>
+      <p>Teste grátis por 7 dias. Cartão necessário, sem cobrança durante o trial.</p>
       <div class="cta-buttons">
-        <a href="https://wa.me/5511999999999?text=Oi+Koalla!" target="_blank" class="btn-wa">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.998 0C5.372 0 0 5.373 0 12.001c0 2.117.554 4.099 1.523 5.817L.057 23.998l6.306-1.655A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.625 0 11.998 0zm.002 21.818a9.818 9.818 0 01-5.011-1.368l-.36-.213-3.741.981.997-3.648-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.429 0 9.818 4.388 9.818 9.818 0 5.43-4.389 9.818-9.818 9.818z"/></svg>
+        <!-- TODO: substitua XXXXXXXXXXX pelo número real do WhatsApp -->
+        <a href="https://wa.me/55XXXXXXXXXXX?text=Oi+Koalla!" target="_blank" rel="noopener" class="btn-wa">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.998 0C5.372 0 0 5.373 0 12.001c0 2.117.554 4.099 1.523 5.817L.057 23.998l6.306-1.655A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.625 0 11.998 0zm.002 21.818a9.818 9.818 0 01-5.011-1.368l-.36-.213-3.741.981.997-3.648-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.429 0 9.818 4.388 9.818 9.818 0 5.43-4.389 9.818-9.818 9.818z"/></svg>
           Começar pelo WhatsApp
         </a>
-        <a href="#planos" class="btn-plan outline" style="padding:15px 28px;border-radius:12px;font-size:0.95rem">Ver planos →</a>
+        <a href="#planos" class="btn-cta-secondary">Ver planos →</a>
       </div>
     </div>
   </div>
@@ -1350,7 +1463,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Koalla<span>.ai</span></div>
-  <div>© 2025 Koalla.ai · Todos os direitos reservados</div>
+  <div>© 2026 Koalla.ai · Todos os direitos reservados</div>
   <div style="display:flex;gap:20px;">
     <a href="#" style="color:var(--white-muted);text-decoration:none">Privacidade</a>
     <a href="#" style="color:var(--white-muted);text-decoration:none">Termos</a>
@@ -1358,7 +1471,7 @@
 </footer>
 
 <script>
-  // Scroll reveal
+  // ─── SCROLL REVEAL ───
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1371,14 +1484,31 @@
 
   reveals.forEach(el => observer.observe(el));
 
-  // Nav scroll effect
+  // ─── NAV SCROLL EFFECT ───
   window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
-    if (window.scrollY > 20) {
-      nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.3)';
-    } else {
-      nav.style.boxShadow = 'none';
-    }
+    nav.style.boxShadow = window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.3)' : 'none';
+  });
+
+  // ─── HAMBURGER MENU ───
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Fecha ao clicar em um link
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
   });
 </script>
 </body>

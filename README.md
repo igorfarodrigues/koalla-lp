@@ -35,12 +35,21 @@ Trial de 7 dias disponível. Cartão necessário, sem cobrança durante o perío
 - Fontes: [Sora](https://fonts.google.com/specimen/Sora) + [DM Sans](https://fonts.google.com/specimen/DM+Sans) via Google Fonts
 - Sem dependências externas ou frameworks
 
+## Documentação do projeto
+
+A documentação de design, conteúdo, padrões técnicos e uso de IA está centralizada em [`docs/`](./docs/).
+
+- [`docs/design-guide.md`](./docs/design-guide.md) — guia visual, cores, tipografia e componentes
+- [`docs/project-standards.md`](./docs/project-standards.md) — padrões de HTML, CSS, JavaScript, acessibilidade e responsividade
+- [`docs/content-guide.md`](./docs/content-guide.md) — tom de voz, CTAs, planos e mensagens principais
+- [`docs/ai-guidelines.md`](./docs/ai-guidelines.md) — orientações para evoluir o projeto com apoio de IA
+
 ## Desenvolvimento
 
 Abra o arquivo diretamente no browser:
 
 ```bash
-open koalla-landing.html
+open index.html
 ```
 
 Antes de publicar, substitua todas as ocorrências de `55XXXXXXXXXXX` pelo número real do WhatsApp do Koalla.
